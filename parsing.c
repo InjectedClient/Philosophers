@@ -12,6 +12,9 @@
 
 #include "philosophers.h"
 
+/*
+	parsing pour verif si les arg sont que des chiffres et pas > a 10  carac
+*/
 int check_arg(int argc, char **argv)
 {
 	int	i;
@@ -38,13 +41,16 @@ int check_arg(int argc, char **argv)
 	}
 	return (1);
 }
+/*
+	check le cas de 0
+*/
 int	rules_parsing(t_rules *rules)
 {
-	if (rules->number_of_philosophers<= 0 || rules->time_to_die <= 0 || \
+	if (rules->nb_of_philosophers<= 0 || rules->time_to_die <= 0 || \
 		rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
 	{
 		printf("Wrong arguments !\n");
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

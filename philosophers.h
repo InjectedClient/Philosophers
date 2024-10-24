@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:50:31 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/22 16:24:43 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:51:54 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,34 @@ typedef struct s_rules
 	int time_must_eat;
 }	t_rules;
 
+typedef struct s_philo
+{
+	t_rules			rules;
+	struct s_data	*data;
+	int				id;
+	long			time;
+}	t_philo;
+
 typedef struct s_data
 {
 	t_philo			*philo;
 	t_rules			global_rules;
+	pthread_t		*thread_ids;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	write;
+	pthread_mutex_t	mutex_check;
 	int				end;
 }	t_data;
 
-typedef struct s_philo
-{
-	t_rules	rules;
-	t_data	*data;
-}	t_philo;
-
-int	check_arg(int argc, char **argv);
-int	main(int argc, char **argv);
-int	ft_atoi(const char *str);
-int rules(t_data *data, char **argvc, int argc);
-int	rules_parsing(t_rules *rules);
-int malloc_data(t_data *data);
+int		check_arg(int argc, char **argv);
+int		main(int argc, char **argv);
+int		ft_atoi(const char *str);
+int		rules(t_data *data, char **argvc, int argc);
+int		rules_parsing(t_rules *rules);
+int		malloc_data(t_data *data);
+int		mutex_init(t_data *data);
+void	free_all(t_data *data);
+int		mutex_init(t_data *data);
+void	philo_init(t_data *data);
 
 #	endif

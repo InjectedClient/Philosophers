@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:49:36 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/22 14:49:59 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:17:25 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ int	ft_atoi(const char *str)
 	if ((sign * nb) < INT_MIN || (sign * nb) > INT_MAX)
 		return (-1);
 	return ((int)sign * nb);
+}
+
+void free_all(t_data *data)
+{
+	if (data->philo)
+		free(data->philo);
+	if (data->thread_ids)
+		free(data->thread_ids);
+	if (data->forks)
+		free(data->forks);
 }
