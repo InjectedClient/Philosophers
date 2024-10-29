@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:44:56 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/24 17:10:01 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:28:33 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void philo_init(t_data *data)
 	{
 		data->philo[i].data = data;
 		data->philo[i].id = i + 1;
-		data->philo[i].time = 0;
+		data->philo[i].time_time = 0;
 		data->philo[i].rules = data->global_rules;
 		i ++;
 	}
@@ -127,4 +127,24 @@ int rules(t_data *data, char **argv, int argc)
 		return (0);
 	}
 	return (philo_init(data), 1);
+}
+
+/*
+	initalise un thread par philo
+	1- id de thread 2-NULL > attributs par defaut
+	3- &routine > fonction qui va s'executer 4-pour passer des arg a la fonction
+*/
+int	init_threads(t_data *data)
+{
+	int i;
+
+	i = 0;
+	data->time = get_time(0);
+	while (i < data->global_rules.nb_of_philosophers)
+	{
+		if (pthread_create(&data->thread_ids[i], NULL, &routine, &data->philo[i]))
+		{
+			//finir a routine
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:49:36 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/24 16:17:25 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:29:42 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_atoi(const char *str)
 	return ((int)sign * nb);
 }
 
-void free_all(t_data *data)
+void	free_all(t_data *data)
 {
 	if (data->philo)
 		free(data->philo);
@@ -48,4 +48,30 @@ void free_all(t_data *data)
 		free(data->thread_ids);
 	if (data->forks)
 		free(data->forks);
+}
+/*
+	accede a l'heure
+*/
+long	get_time(long t)
+{
+	struct	timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_usec / 1000 + tv.tv_sec * 1000 - t);
+}
+/*
+	mets un thread en pause et check si le prog peut continuer
+*/
+void	ft_usleep(t_data *data, long time_action)
+{
+	long	start_t;
+	long	cur_t;
+
+	start_t = get_time(0);
+	cur_t = start_t;
+	while (check_end(data, &data->philo[0]) != -1 && (cur_t - start_t) < time_action)
+	{
+		usleep(100);
+		cur_t = get_time(0);
+	}
 }

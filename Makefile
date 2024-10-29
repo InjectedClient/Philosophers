@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-SRCS = philo_utils.c philo_init.c parsing.c main.c
+SRCS = routine.c philo_utils.c philo_init.c parsing.c main.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -24,7 +24,7 @@ all:			$(NAME)
 
 
 $(NAME):		$(OBJS)
-				$(CC)  -pthread -lpthread -o $(NAME) $(OBJS) $(CFLAGS)
+				$(CC) -pthread -lpthread -o $(NAME) $(OBJS) $(CFLAGS)
 
 .c.o:
 	@CURRENT_COUNT=$$(ls $(OBJS) 2>/dev/null | wc -l); \
