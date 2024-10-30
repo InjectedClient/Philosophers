@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:50:31 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:35:51 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:55:35 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	print_routine(t_philo *philo);
 void	print_action_and_wait(t_philo *philo, char *action, int time_action);
 int		check_end(t_data *data, t_philo *philo);
 void	ft_usleep(t_data *data, long time_action);
-void	fork_init(t_philo *philo);
+void	forks_init(t_philo *philo);
 void	print_meal(t_philo *philo);
 void	print_action_and_wait(t_philo *philo, char *action, int time_action);
 void	check_philo_life(t_data *data);

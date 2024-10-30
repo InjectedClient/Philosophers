@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:05:21 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:37:00 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:56:48 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_action_and_wait(t_philo *philo, char *action, int time_action)
 		printf(action, get_time(philo->data->time), philo->id);
 	}
 	pthread_mutex_unlock(&philo->data->write);
-	ft_usleep(philo->data, time_action);
+	ft_usleep(philo->data ,time_action);
 }
 
 /*
@@ -59,24 +59,6 @@ void	print_meal(t_philo *philo)
 }
 
 /*
-	ecrit dans le terminal les differentes actions des philos
-	mutex write pour pas qu'ils ecrivent tous en meme temps
-*/
-void	print_action_and_wait(t_philo *philo, char *action, int time_action)
-{
-	pthread_mutex_lock(&philo->data->write);
-	if (check_end(philo->data, philo) != 0 && philo->rules.nb_of_philosophers > 1)
-	{
-		printf(action, get_time(philo->data->time), philo->id);
-	}
-	pthread_mutex_unlock(&philo->data->write);
-	ft_usleep(philo->data ,time_action);
-}
-
-/*
 
 */
-void	check_philo_life(t_data *data)
-{
-
-}
+//void	check_philo_life(t_data *data)

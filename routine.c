@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:55:43 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:24:29 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:55:33 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	eating(t_philo *philo, int fork_1, int fork_2)
 	if (!pthread_mutex_lock(&philo->data->forks[fork_1])
 		&& !pthread_mutex_lock(&philo->data->forks[fork_2]))
 	{
-		pthread_mutex_lock(&philo->time_time);
+		pthread_mutex_lock(&philo->data->mutex_check);
 		philo->time_time = get_time(philo->data->time);
-		pthread_mutex_unlock(&philo->time_time);
+		pthread_mutex_unlock(&philo->data->mutex_check);
 		pthread_mutex_lock(&philo->data->write);
 		print_meal(philo);
 		pthread_mutex_unlock(&philo->data->write);
@@ -58,7 +58,7 @@ void	eating(t_philo *philo, int fork_1, int fork_2)
 	assignés même lorsque l'ID du philosophe est le dernier dans la séquence.
 	eating est appele avec le philo et deux fork
 */
-void	fork_init(t_philo *philo)
+void	forks_init(t_philo *philo)
 {
 	int fork_1;
 	int fork_2;

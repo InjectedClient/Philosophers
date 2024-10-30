@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:44:56 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:35:40 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:59:03 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,12 @@ int	init_threads(t_data *data)
 	{
 		if (pthread_create(&data->thread_ids[i], NULL, &routine, &data->philo[i]))
 		{
-			if (pthread_join(data->thread_ids[i], NULL));
-				return (1);
+			while (i -- >= 0)
+				pthread_join(data->thread_ids[i], NULL);
+			return (1);
 		}
 		i ++;
 	}
-	check_philo_life(data); //<<finir
-
+	//finir >> check_philo_life(data);
+	return 1;
 }
