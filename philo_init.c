@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:44:56 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/29 17:28:33 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:35:40 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,13 @@ int rules(t_data *data, char **argv, int argc)
 	if (argc == 6)
 		rules.time_must_eat = ft_atoi(argv[5]);
 	data->global_rules = rules;
+	data->end = rules.nb_of_philosophers;
 	if (!rules_parsing(&rules))
 		return (0);
 	if (!malloc_data(data))
 		return (0);
 	if (!mutex_init(data))
-	{
-		free_all(data);
-		return (0);
-	}
+		return (free_all(data), 0);
 	return (philo_init(data), 1);
 }
 
@@ -144,7 +142,11 @@ int	init_threads(t_data *data)
 	{
 		if (pthread_create(&data->thread_ids[i], NULL, &routine, &data->philo[i]))
 		{
-			//finir a routine
+			if (pthread_join(data->thread_ids[i], NULL));
+				return (1);
 		}
+		i ++;
 	}
+	check_philo_life(data); //<<finir
+
 }
