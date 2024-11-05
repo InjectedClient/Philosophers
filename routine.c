@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:55:43 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:55:33 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:51:09 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	forks_init(t_philo *philo)
 	fork_2 = 0;
 	if	(philo->rules.nb_of_philosophers == 1)
 		return ;
-	if (philo->rules.nb_of_philosophers % 2 == 0)
+	if (philo->id % 2 == 0)
 	{
 		fork_1 = philo->id - 1;
 		fork_2 = philo->id % philo->rules.nb_of_philosophers;
@@ -95,7 +95,7 @@ void	*routine(void *perso)
 		forks_init(philo);
 			print_action_and_wait(philo, "%ld %d" " is sleeping\n", philo->rules.time_to_sleep);
 			print_action_and_wait(philo, "%ld %d" " is thinking\n", philo->rules.time_to_think);
-		if (check_end(philo->data, philo) == 0)
+		if (check_end(philo->data, philo))
 			return ((void *) 0);
 	}
 }

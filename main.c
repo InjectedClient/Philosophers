@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:29:28 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:51:50 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:14:48 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int main(int argc, char **argv)
 		return (0);
 	if (!rules(&data, argv, argc))
 		return (0);
-	//thread_init
+	init_threads(&data);
+	return (clean_mutexes_and_data(&data));
 }

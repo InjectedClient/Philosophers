@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:44:56 by nlambert          #+#    #+#             */
-/*   Updated: 2024/10/30 17:59:03 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:52:45 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ int rules(t_data *data, char **argv, int argc)
 	rules.time_to_eat = ft_atoi(argv[3]);
 	rules.time_to_sleep = ft_atoi(argv[4]);
 	rules.time_to_think = (rules.time_to_die - rules.time_to_eat \
-							- rules.time_to_sleep) * 0.50;
+							- rules.time_to_sleep) * 0.75;
 	rules.time_must_eat = -1;
 	if (argc == 6)
 		rules.time_must_eat = ft_atoi(argv[5]);
 	data->global_rules = rules;
-	data->end = rules.nb_of_philosophers;
 	if (!rules_parsing(&rules))
 		return (0);
+	data->end = rules.nb_of_philosophers;
 	if (!malloc_data(data))
 		return (0);
 	if (!mutex_init(data))
@@ -128,9 +128,11 @@ int rules(t_data *data, char **argv, int argc)
 }
 
 /*
-	initalise un thread par philo
-	1- id de thread 2-NULL > attributs par defaut
-	3- &routine > fonction qui va s'executer 4-pour passer des arg a la fonction
+	initalise un thread par philo et execute routine
+	create -> 1-(id de thread 2-NULL > attributs par defaut
+	3- &routine > fonction qui va s'executer 4-pour passer des arg a la fonction)
+	join -> attend la fin de tous les thread et retourne 1/2 si erreur
+
 */
 int	init_threads(t_data *data)
 {
@@ -144,10 +146,17 @@ int	init_threads(t_data *data)
 		{
 			while (i -- >= 0)
 				pthread_join(data->thread_ids[i], NULL);
-			return (1);
+			return (printf("\033[31mProblem creating threads !\n\033[0m"), 0);
 		}
 		i ++;
 	}
-	//finir >> check_philo_life(data);
-	return 1;
+	check_philo_life(data);
+	i = 0;
+	while (i < data->global_rules.nb_of_philosophers)
+	{
+		if (pthread_join(data->thread_ids[i], NULL))
+			return (printf("\033[31mProblem ending threads !\n\033[0m"), 0);
+		i ++;
+	}
+	return (0);
 }
