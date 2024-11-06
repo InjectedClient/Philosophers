@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   Barg: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 16:05:08 barg nlambert          #+#    #+#             */
-/*   Updated: 2024/10/22 14:14:19 barg nlambert         ###   ########.fr       */
+/*   Created: 2024/11/06 16:20:40 by nlambert          #+#    #+#             */
+/*   Updated: 2024/11/06 16:21:13 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	parsing pour verif si les arg sont que des chiffres et pas > a 10  carac
 */
-int check_arg(int argc, char **argv)
+int	check_arg(int argc, char **argv)
 {
 	int	i;
 	int	arg;
@@ -41,12 +41,10 @@ int check_arg(int argc, char **argv)
 	}
 	return (1);
 }
-/*
-	check le cas de 0
-*/
-int	rules_parsing(t_rules *rules)
+
+int	check_arg2(t_rules *rules)
 {
-	if (rules->nb_of_philosophers<= 0 || rules->time_to_die <= 0 || \
+	if (rules->nb_philo <= 0 || rules->time_to_die <= 0 || \
 		rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
 	{
 		printf("Wrong arguments !\n");

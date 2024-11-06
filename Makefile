@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-SRCS = routine.c philo_utils.c philo_utils2.c philo_init.c parsing.c main.c
+SRCS = routine.c utils.c utils2.c init.c parsing.c main.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -28,7 +28,7 @@ $(NAME):		$(OBJS)
 
 .c.o:
 	@CURRENT_COUNT=$$(ls $(OBJS) 2>/dev/null | wc -l); \
-	printf "\e[32mCompiling philosophers.. [$$CURRENT_COUNT/$(TOTAL_FILES)]\e[0m\r"; \
+	printf "\eCompiling philosophers.. [$$CURRENT_COUNT/$(TOTAL_FILES)]\e\r"; \
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
