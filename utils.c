@@ -6,7 +6,7 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:49:36 by nlambert          #+#    #+#             */
-/*   Updated: 2024/11/06 16:27:16 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:42:44 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ void	free_all(t_data *data)
 		free(data->forks);
 }
 
-/*
-	en fin de programme detruit les mutex et free la memoire
-	return le nb de mutex qu'elle a pas reussi a detruire (0 normalement)
-*/
 int	free_and_destroy(t_data *data)
 {
 	int	i;
@@ -88,12 +84,6 @@ long	get_time(long t)
 	return (tv.tv_usec / 1000 + tv.tv_sec * 1000 - t);
 }
 
-/*
-	check si le prog peut continuer
-	check si le temps depuis le debut de pause est < a time_action
-	mets un thread en pause pendant 100 milisecondes
-
-*/
 void	ft_usleep(t_data *data, long time_action)
 {
 	long	start_t;

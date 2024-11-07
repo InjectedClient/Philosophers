@@ -6,15 +6,12 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:20:40 by nlambert          #+#    #+#             */
-/*   Updated: 2024/11/06 16:21:13 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:13:23 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/*
-	parsing pour verif si les arg sont que des chiffres et pas > a 10  carac
-*/
 int	check_arg(int argc, char **argv)
 {
 	int	i;

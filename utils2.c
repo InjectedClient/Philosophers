@@ -6,16 +6,12 @@
 /*   By: nlambert <nlambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:05:21 by nlambert          #+#    #+#             */
-/*   Updated: 2024/11/06 16:26:21 by nlambert         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:28:06 by nlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/*
-	est appelée qd un philo meurt
-	udpate check et write qu'il est mort
-*/
 void	print_death(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->mutex_check);
@@ -26,12 +22,6 @@ void	print_death(t_data *data, int i)
 	pthread_mutex_unlock(&data->write);
 }
 
-/*
-	calcule le temps ecoule depuis le dernier repas du philo
-	si temps ecoule depuis dernier repas > temps max sans manger
-	-> le philo est considere mort
-	utilise % pour revenir au 1er philo quand on est au dernier
-*/
 void	check_philo_life(t_data *data)
 {
 	int	i;
@@ -57,11 +47,6 @@ void	check_philo_life(t_data *data)
 	}
 }
 
-/*
-	check si on peut continuer donc que
-	aucun philo est mort de faim ou si c'est
-	la fin de la simulation (end = 0 donc plus de philo)
-*/
 int	check_end(t_data *data, t_philo *philo)
 {
 	(void)philo;
@@ -75,10 +60,6 @@ int	check_end(t_data *data, t_philo *philo)
 	return (1);
 }
 
-/*
-	check si le philo est dead avant de miam miam
-	inclut le temps actuel + ID du philo
-*/
 void	print_meal(t_philo *philo)
 {
 	if (check_end(philo->data, philo))
@@ -89,10 +70,6 @@ void	print_meal(t_philo *philo)
 	}
 }
 
-/*
-	Sert a ecrire les actions des philos
-	mutex WRITE pour pas que tout les philos write en mm temps
-*/
 void	print_wait(t_philo *philo, char *action, int time_action)
 {
 	pthread_mutex_lock(&philo->data->write);
